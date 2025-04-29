@@ -37,8 +37,8 @@
     align-items: center;
     justify-content: space-between;
     list-style: none;
-    color: #000000;
-    padding: 10px;
+    color: #ffffff;
+    padding: 10px;  
 }
 
 .header a {
@@ -69,6 +69,11 @@
     margin: 10px;
 }
 
+.botoes .botao_login:hover{
+    background-color: #1c5769;
+    cursor: pointer;
+} 
+
 .botoes .botao_cadastro {
     background-color: #c9b927;
     padding: 10px 20px;
@@ -76,4 +81,9 @@
     border: none;
     color: #ffff;
     margin: 10px;
+}
+
+.botoes .botao_cadastro:hover{
+    background-color: #c09e2c;
+    cursor: pointer;
 }
