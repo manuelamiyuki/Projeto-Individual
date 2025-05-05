@@ -38,7 +38,6 @@
 
 .banner .container p {
     width: 55%;
-
     margin: 0;
     padding: 0;
     font-size: 36px;
@@ -49,7 +48,8 @@
     align-items: flex-end;
     flex-direction: column;
     max-width: 40%;
-    margin: 4%;
+    margin: 5%;
+    padding-top: 30px;
 }
 
 .card >p{
@@ -58,6 +58,22 @@
 
 .frame{
     width: 25%;
-    margin:0px 20px;
+    margin: 0 10%
     
 }
+
+
+.personagem {
+    margin: 3% 20%;
+    text-align: center;
+    font-size: 25px;
+}
+
+.elenco >img{
+    width: 400px;
+    display: flex;
+    padding: 30px;
+    margin: auto;
+} 
+
+
