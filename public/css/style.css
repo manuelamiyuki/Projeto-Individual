@@ -126,7 +126,7 @@ body {
 .banner {
     height: var(--tamanho-banner);
     color: white;
-    background-image: url('../img/fundo/banner.jpeg');
+    background-image: url('../assets/img/fundo/banner.jpeg');
     background-size: cover;
     opacity: 90%;
 }
@@ -270,7 +270,7 @@ h1 {
 /*texto sobreposto no index*/
 
 .background {
-    background-image: url('../img/fundo/reencontro.jpg');
+    background-image: url('../assets/img/fundo/reencontro.jpg');
     background-size: cover;
     background-position: center;
     height: 100vh;

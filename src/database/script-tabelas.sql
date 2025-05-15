@@ -6,16 +6,27 @@
 comandos para mysql server
 */
 
-CREATE DATABASE CentralTalks;
+create database CentralTalks;
+use CentralTalks;
 
-USE CentralTalks;
 
-CREATE TABLE usuario (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	nome VARCHAR(50),
-	email VARCHAR(50),
-	senha VARCHAR(50)
+create table usuarios(
+id int primary key auto_increment,
+nome varchar (100),
+userName varchar( 100),
+email varchar(50),
+senha varchar (50),
+personagemFavorito varchar(50),
+constraint chk_personagem_favorito check (personagemFavorito in('Chandler','Ross','Monica','Rachel','Joey','Phoebe'))
 );
 
 
+create table quiz(
+id int primary key auto_increment,
+tentativa int default 0,
+qtd_perguntas int,
+qtd_respostas_certas int,
+fkUsuarios int,
+foreign key (fkUsuarios) references usuarios(id)
+);
 
