@@ -3,12 +3,48 @@
     padding: 0;
 }
 
+.container_select {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-inline: 10%;
+
+}
+
+.container_select .impacto_texto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10%;
+    font-size: 27px;
+    text-align: center;
+    background-color: #d1bee2;
+    border-radius: 15px;
+    padding: 5%;
+}
+
+.temporadas {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: 10% 20%;
+    font-size: 25px;
+    padding: 15px;
+    border: #000000 solid 3px;
+    border-radius: 1rem;
+    background-color: #ffffff;
+}
+
+.temporadas h3 {
+    font-family: "Gloria Hallelujah", cursive;
+}
+
+
 .resumo_temporadas {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 50vh;
 }
 
 
@@ -39,6 +75,7 @@
     background-color: #f7eaff;
     color: #000000;
     text-align: center;
+    margin: auto;
 }
 
 
@@ -57,3 +94,17 @@
     background-color: #d48c00;
 }
 
+.resposta_temporada{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:#333 solid 3px;
+    font-size: 25px;
+    margin-inline: 25%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border-radius: 10px;
+    text-align: center;
+    padding: 50px;
+    
+}
