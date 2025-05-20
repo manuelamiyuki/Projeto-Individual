@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboards.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+    <link rel="icon" href="./assets/img/icone/frame.png" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script src="js/sessao.js"></script>
+
+
+    <title> CentralTalks | home</title>
+</head>
+
+<body onload="validarSessao()">
+    <header>
+        <div class="header">
+            <div class="container">
+                <h1 class="logo">Central·Talks</h1>
+                <ul class="navbar">
+                    <li class="agora">
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li class="agora">
+                        <a href="temporadas.html">Temporadas</a>
+                    </li>
+                    <li class="agora">
+                        <a href="curiosidades.html">Curiosidades</a>
+                    </li>
+                    <li class="agora">
+                        <a href="quiz.html">Quiz</a>
+                    </li>
+                    <div class="botoes">
+                        <button class="botao_cadastro">
+                            <a href="cadastro.html">vire um FRIEND</a>
+                        </button>
+                        <button class="botao_login">
+                            <a href="login.html">Entrar</a>
+                        </button>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </header>
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+
+<body>
+
+    <h1>Resultado do Quiz</h1>
+
+    <div class="kpi" id="kpiPontuacao">Pontuação: --%</div>
+    <div class="kpi" id="kpiAcertos">Acertos: --</div>
+    <div class="kpi" id="kpiErros">Erros: --</div>
+
+    <div id="mensagemFinal">Carregando...</div>
+
+    <div id="graficoContainer">
+        <canvas id="graficoPizza"></canvas>
+    </div>
+
+    <div id="botoes" class="flex-colunar padding-8">
+        <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
+    </div>
+
+    <script>
+        const pontuacao = parseInt(localStorage.getItem("pontuacao")) || 0;
+        const porcentagem = parseInt(localStorage.getItem("porcentagem")) || 0;
+        const totalQuestoes = 15; 
+        const acertos = pontuacao;
+        const erros = totalQuestoes - pontuacao;
+
+        // Exibir KPIs
+        document.getElementById("kpiPontuacao").innerText = `Pontuação: ${porcentagem}%`;
+        document.getElementById("kpiAcertos").innerText = `Acertos: ${acertos}`;
+        document.getElementById("kpiErros").innerText = `Erros: ${erros}`;
+
+        // Mensagem personalizada
+        let mensagem = "";
+        if (erros > acertos) {
+            mensagem = "Mais sorte na próxima!";
+        } else if (erros === acertos) {
+            mensagem = "Você está no caminho!";
+        } else {
+            mensagem = "Muito bem!";
+        }
+        document.getElementById("mensagemFinal").innerText = mensagem;
+
+        // Gráfico de pizza com Chart.js
+        const ctx = document.getElementById('graficoPizza').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Acertos', 'Erros'],
+                datasets: [{
+                    data: [acertos, erros],
+                    backgroundColor: ['#62E8B1', '#E86264'],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                return `${context.label}: ${context.parsed} questões`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+
+        function tentarNovamente() {
+                // volta para a pg de quiz
+                window.location.reload()
+            }
+
+    </script>
+</body>
+
+</html>

@@ -9,9 +9,11 @@
     <link rel="stylesheet" href="css/style.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
     <link rel="icon" href="./assets/img/icone/frame.png" />
+
+    <script src="js/sessao.js"></script>
 
 
     <title> CentralTalks | home</title>
@@ -19,40 +21,43 @@
 
 
 
-<body onload="onloadEsconder()">
-  <header>
-    <div class="header">
-      <div class="container">
-        <h1 class="logo">Central·Talks</h1>
-        <ul class="navbar">
-          <li class="agora">
-            <a href="index.html">Home</a>
-          </li>
-          <li class="agora">
-            <a href="temporadas.html">Temporadas</a>
-          </li>
-          <li class="agora">
-            <a href="curiosidades.html">Curiosidades</a>
-          </li>
-          <li class="agora">
-            <a href="quiz.html">Quiz</a>
-          </li>
-          <div class="botoes">
-            <button class="botao_cadastro">
-              <a href="cadastro.html">vire um FRIEND</a>
-            </button>
-            <button class="botao_login">
-              <a href="login.html">Entrar</a>
-            </button>
-          </div>
-        </ul>
-      </div>
-    </div>
-  </header>
+    <body onload="validarSessao(), onloadEsconder()">
+        <header>
+            <div class="header">
+                <div class="container">
+                    <h1 class="logo">Central·Talks</h1>
+                    <ul class="navbar">
+                        <li class="agora">
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="agora">
+                            <a href="temporadas.html">Temporadas</a>
+                        </li>
+                        <li class="agora">
+                            <a href="curiosidades.html">Curiosidades</a>
+                        </li>
+                        <li class="agora">
+                            <a href="quiz.html">Quiz</a>
+                        </li>
+                        <div class="botoes">
+                            <button class="botao_cadastro">
+                                <a href="cadastro.html">vire um FRIEND</a>
+                            </button>
+                            <button class="botao_login">
+                                <a href="login.html">Entrar</a>
+                            </button>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            </header>
+
+            <main class="area-central">
+
     <div id="pontuacaoEJogo">
         <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
 
-        <div id="pontuacao" class="flex-colunar width-fit-content border-primary">
+        <!-- <div id="pontuacao" class="flex-colunar width-fit-content border-primary">
             <div id="pontuacaoDuranteJogo" class="flex-colunar padding-8">
                 <span class="width-fit-content">Quantidade de acertos: <span id="spanCertas"></span></span>
                 <span class="width-fit-content">Quantidade de erros: <span id="spanErradas"></span></span>
@@ -63,7 +68,7 @@
                 </span>
                 <span id="msgFinal" class="width-fit-content">***</span>
             </div>
-        </div>
+        </div> -->
 
         <div id="jogo" class="width-fit-content flex-colunar border-secondary">
 
@@ -103,11 +108,17 @@
                 <button onclick="submeter()" id="btnSubmeter">Submeter resposta</button>
                 <button onclick="avancar()" id="btnProx" disabled>Avançar para próxima questão</button>
                 <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
-                <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
+                
             </div>
 
         </div>
     </div>
+    <button id="btnVerResultados" class="botao_submeter" style="display: none;">
+        Ver Resultados
+        </button>
+
+</main>
+
 </body>
 
 </html>
@@ -261,12 +272,10 @@
     // let isUltima = numeroDaQuestaoAtual == quantidadeDeQuestoes-1 ? true : false
 
     function onloadEsconder() {
-        document.getElementById('pontuacao').style.display = "none"
         document.getElementById('jogo').style.display = "none"
     }
 
     function iniciarQuiz() {
-        document.getElementById('pontuacao').style.display = "flex"
         document.getElementById('jogo').style.display = "flex"
         document.getElementById('btnIniciarQuiz').style.display = "none"
 
@@ -277,7 +286,7 @@
         btnSubmeter.disabled = false
         btnProx.disabled = true
         // btnConcluir.disabled = true
-        btnTentarNovamente.disabled = true
+   
     }
 
     function preencherHTMLcomQuestaoAtual(index) {
@@ -344,11 +353,7 @@
         limparCoresBackgroundOpcoes()
     }
 
-    function tentarNovamente() {
-        // atualiza a página
-        window.location.reload()
-    }
-
+   
     function checarResposta() {
         const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual] // questão atual 
         const respostaQuestaoAtual = questaoAtual.alternativaCorreta // qual é a resposta correta da questão atual
@@ -370,7 +375,6 @@
                 document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
                 pontuacaoFinal++
                 certas++
-                document.getElementById("spanCertas").innerHTML = certas
                 numeroDaQuestaoAtual++
             } else if (option.checked && option.value !== respostaQuestaoAtual) {
                 const wrongLabelId = option.labels[0].id
@@ -379,7 +383,6 @@
                 document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
                 tentativaIncorreta++
                 erradas++
-                document.getElementById("spanErradas").innerHTML = erradas
                 numeroDaQuestaoAtual++
             }
         })
@@ -401,36 +404,49 @@
     }
 
     function finalizarJogo() {
-        let textoParaMensagemFinal = null
-        let classComCoresParaMensagemFinal = null
-        const porcentagemFinalDeAcertos = pontuacaoFinal / quantidadeDeQuestoes
 
-        if (porcentagemFinalDeAcertos <= 0.3) {
-            textoParaMensagemFinal = "Parece que você não estudou..."
-            classComCoresParaMensagemFinal = "text-danger-with-bg"
-        }
-        else if (porcentagemFinalDeAcertos > 0.3 && porcentagemFinalDeAcertos < 0.9) {
-            textoParaMensagemFinal = "Pode melhorar na próxima, hein!"
-            classComCoresParaMensagemFinal = "text-warning-with-bg"
-        }
-        else if (porcentagemFinalDeAcertos >= 0.9) {
-            textoParaMensagemFinal = "Uau, parabéns!"
-            classComCoresParaMensagemFinal = "text-success-with-bg"
+        // Oculta o quiz visualmente
+        document.getElementById('jogo').style.display = 'none'
+
+        // Mostra o botão de Ver Resultados
+        const btnVerResultados = document.getElementById('btnVerResultados')
+        btnVerResultados.style.display = 'block'
+
+        // Define o redirecionamento
+        btnVerResultados.onclick = () => {
+            window.location.href = '/dashboard' // Altere se a URL da dashboard for diferente
         }
 
-        textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos) * 100) + "% das questões."
+        // let textoParaMensagemFinal = null
+        // let classComCoresParaMensagemFinal = null
+        // const porcentagemFinalDeAcertos = pontuacaoFinal / quantidadeDeQuestoes
+
+        // if (porcentagemFinalDeAcertos <= 0.3) {
+        //     textoParaMensagemFinal = "Parece que você não estudou..."
+        //     classComCoresParaMensagemFinal = "text-danger-with-bg"
+        // }
+        // else if (porcentagemFinalDeAcertos > 0.3 && porcentagemFinalDeAcertos < 0.9) {
+        //     textoParaMensagemFinal = "Pode melhorar na próxima, hein!"
+        //     classComCoresParaMensagemFinal = "text-warning-with-bg"
+        // }
+        // else if (porcentagemFinalDeAcertos >= 0.9) {
+        //     textoParaMensagemFinal = "Uau, parabéns!"
+        //     classComCoresParaMensagemFinal = "text-success-with-bg"
+        // }
+
+        // textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos) * 100) + "% das questões."
 
 
-        document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
-        document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal)
-        document.getElementById('spanPontuacaoFinal').innerHTML = pontuacaoFinal
+        // document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
+        // document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal)
+        // document.getElementById('spanPontuacaoFinal').innerHTML = pontuacaoFinal
 
-        document.getElementById('jogo').classList.add("text-new-gray")
+        // document.getElementById('jogo').classList.add("text-new-gray")
 
-        btnProx.disabled = true
-        btnSubmeter.disabled = true
-        // btnConcluir.disabled = true
-        btnTentarNovamente.disabled = false
+        // btnProx.disabled = true
+        // btnSubmeter.disabled = true
+        // // btnConcluir.disabled = true
+        // btnTentarNovamente.disabled = false
 
     }
 </script>

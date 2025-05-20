@@ -1,3 +1,6 @@
+/* Não usar pure white or pure black: https://uxplanet.org/basicdesign-never-use-pure-black-in-typography-36138a3327a6 */
+/* The 4-point grid system: https://medium.com/@sainzkike/controlling-spacing-in-design-systems-multiple-spacing-9bf1afec87f */
+
 :root {
     --primary-brand-color: #ED145B;
     --secondary-brand-color: #0762C8;
@@ -21,9 +24,53 @@ body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-button {
-    font-family: monospace;
+#btnIniciarQuiz,
+#btnVerResultados {
+    font-size: 1.4rem;
     font-weight: bold;
+    padding: 16px 36px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+    display: block;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo individual /
+#btnIniciarQuiz {
+    background-color: var(--primary-purple);
+    color: white;
+}
+
+#btnIniciarQuiz:hover {
+    background-color: var(--yellow-friends);
+    color: black;
+    transform: scale(1.05);
+}
+
+#btnVerResultados {
+    background-color: var(--orange-friends);
+    color: white;
+    display: none;
+    / esconde inicialmente */
+
+
+#btnVerResultados:hover {
+    background-color: var(--red-friends);
+    transform: scale(1.05);
+}
+
+.area-central {
+    min-height: calc(100vh - 80px);
+    /* compensar header */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
 }
 
 .flex-colunar {
