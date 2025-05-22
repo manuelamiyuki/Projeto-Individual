@@ -16,12 +16,13 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <script src="js/sessao.js"></script>
+    <script src="js/dashboard.js"></script>
 
 
     <title> CentralTalks | home</title>
 </head>
 
-<body onload="validarSessao()">
+<body onload="validarSessao(),listar()">
     <header>
         <div class="header">
             <div class="container">
@@ -65,72 +66,21 @@
 
     <div id="mensagemFinal">Carregando...</div>
 
-    <div id="graficoContainer">
-        <canvas id="graficoPizza"></canvas>
-    </div>
+     <div class="dash">
+            <div id="alerta">
+            </div>
+            <div class="btns-dash" id="btnAquario">
+            </div>
+            <div id="graficos">
+            </div>
+        </div>
+
 
     <div id="botoes" class="flex-colunar padding-8">
         <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
     </div>
 
-    <script>
-        const pontuacao = parseInt(localStorage.getItem("pontuacao")) || 0;
-        const porcentagem = parseInt(localStorage.getItem("porcentagem")) || 0;
-        const totalQuestoes = 15; 
-        const acertos = pontuacao;
-        const erros = totalQuestoes - pontuacao;
-
-        // Exibir KPIs
-        document.getElementById("kpiPontuacao").innerText = `Pontuação: ${porcentagem}%`;
-        document.getElementById("kpiAcertos").innerText = `Acertos: ${acertos}`;
-        document.getElementById("kpiErros").innerText = `Erros: ${erros}`;
-
-        // Mensagem personalizada
-        let mensagem = "";
-        if (erros > acertos) {
-            mensagem = "Mais sorte na próxima!";
-        } else if (erros === acertos) {
-            mensagem = "Você está no caminho!";
-        } else {
-            mensagem = "Muito bem!";
-        }
-        document.getElementById("mensagemFinal").innerText = mensagem;
-
-        // Gráfico de pizza com Chart.js
-        const ctx = document.getElementById('graficoPizza').getContext('2d');
-        new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ['Acertos', 'Erros'],
-                datasets: [{
-                    data: [acertos, erros],
-                    backgroundColor: ['#62E8B1', '#E86264'],
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom'
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function (context) {
-                                return `${context.label}: ${context.parsed} questões`;
-                            }
-                        }
-                    }
-                }
-            }
-        });
-
-
-        function tentarNovamente() {
-                // volta para a pg de quiz
-                window.location.reload()
-            }
-
-    </script>
+    
 </body>
 
 </html>

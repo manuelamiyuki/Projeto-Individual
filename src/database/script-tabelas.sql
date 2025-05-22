@@ -26,6 +26,7 @@ id int primary key auto_increment,
 tentativa int default 0,
 qtd_perguntas int,
 qtd_respostas_certas int,
+qtd_respostas_erradas int,
 fkUsuarios int,
 foreign key (fkUsuarios) references usuarios(id)
 );

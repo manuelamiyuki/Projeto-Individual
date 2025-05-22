@@ -8,4 +8,9 @@ router.post("/enviar", function (req, res) {
     quizController.enviar(req, res);
 });
 
+router.get("/listar/:idUsuario", function (req, res) {
+    quizController.listar(req, res);
+});
+
+
 module.exports = router;
