@@ -22,7 +22,7 @@
     <title> CentralTalks | home</title>
 </head>
 
-<body onload="validarSessao(),listar()">
+<body onload="validarSessao(),listar(),listarPersonagensFavoaritos()">
     <header>
         <div class="header">
             <div class="container">
@@ -67,6 +67,12 @@
     <div id="mensagemFinal">Carregando...</div>
 
      <div class="dash">
+        <div id="graficoPersonagens" class="display-none">
+            <h3 class="tituloGraficos">Jogadores Fvaoritados</h3>
+            <div class="graph">
+                <canvas id="graficoPersonagensCanvas"></canvas>
+            </div>
+        </div>
             <div id="alerta">
             </div>
             <div class="btns-dash" id="btnAquario">

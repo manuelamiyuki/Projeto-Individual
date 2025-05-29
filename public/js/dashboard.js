@@ -153,3 +153,82 @@ function tentarNovamente() {
     window.location.reload()
 }
 
+
+
+
+
+function listarPersonagensFavoaritos() {
+    fetch(`/dash/listarPersonagensFavoaritos`)
+        .then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json().then(function (dados) {
+                    console.log("Dados de empunhadura:", dados);
+                    plotarGraficoPersonagensFavoritos(dados[0]);
+                });
+            } else {
+                alert("Houve um erro ao tentar puxar os dados!");
+            }
+        })
+        .catch(function (erro) {
+            console.error("#ERRO: ", erro);
+            alert("Erro ao comunicar com o servidor.");
+        });
+
+    return false;
+}
+
+function plotarGraficoPersonagensFavoritos(dados) {
+    console.log('Plotando gráfico de empunhadura com os dados:', dados);
+
+    let labels = ['Chandler','Ross','Monica','Rachel','Joey','Phoebe'];
+    let valores = [dados.Chandler, dados.Ross, dados.Monica, dados.Rachel, dados.Joey, dados.Phoebe];
+
+    const config = {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Personagens Favoritados',
+                data: valores,
+                backgroundColor: [
+                    'rgb(255, 159, 64)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    'rgb(102, 255, 148)',
+                    'rgb(255, 102, 222)',
+                    'rgb(245, 255, 102)',
+                ],
+                borderColor: [
+                    'rgb(255, 159, 64)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    'rgb(102, 255, 148)',
+                    'rgb(255, 102, 222)',
+                    'rgb(245, 255, 102)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    precision: 0
+                }
+            }
+        }
+    };
+
+  
+    document.getElementById("graficoPersonagens").classList.remove("display-none");
+    document.getElementById("graficoPersonagens").classList.add("display-block");
+
+    // Criar o gráfico
+    new Chart(
+        document.getElementById('graficoPersonagensCanvas'),
+        config
+    );
+}
+
+
+
