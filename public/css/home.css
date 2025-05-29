@@ -6,92 +6,13 @@
     box-sizing: border-box;
 }
 
-/* barra de navegação*/
+/*zerando a pg*/
 
-.header {
-    height: var(--tamanho-header);
-    background-color: #703c8f;
-    color: #ffffff;
-    border-bottom: #000000;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-
-.logo {
-    width: fit-content;
-    font-weight: 600;
-    font-size: 40px;
-
-}
-
-.container {
-    display: flex;
-    width: 80%;
-    margin: auto;
-
-}
-
-.header .container {
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-}
-
-.navbar {
-    width: 40%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    list-style: none;
-    color: #ffffff;
-    padding: 10px;
-}
-
-.header a {
-    text-decoration: none;
-    color: #ffffff;
-    margin: 10px;
-    font-size: 20px;
-}
-
-.agora {
-    font-weight: 800;
-}
-
-.botoes {
-    margin: 10px;
-    display: flex;
-    justify-content: space-between;
-
-}
-
-
-.botoes .botao_login {
-    background-color: #317185;
-    padding: 10px 20px;
-    border-radius: 10px;
-    border: none;
-    color: #ffff;
-    margin: 10px;
-}
-
-.botoes .botao_login:hover {
-    background-color: #1c5769;
-    cursor: pointer;
-}
-
-.botoes .botao_cadastro {
-    background-color: #c9b927;
-    padding: 10px 20px;
-    border-radius: 10px;
-    border: none;
-    color: #ffff;
-    margin: 10px;
-}
-
-.botoes .botao_cadastro:hover {
-    background-color: #c09e2c;
-    cursor: pointer;
-}
-
 
 
 /*fazendo o banner*/
@@ -152,7 +73,7 @@ body {
     max-width: 40%;
     margin: 5%;
     padding-top: 30px;
-    
+
 }
 
 .card_intro>p {
@@ -325,132 +246,3 @@ h1 {
     width: 50px;
     margin: 10px;
 }
-
-/*login e cadastro*/
-
-
-.login {
-    height: 100vh;
-    background-image: url('../assets/img/fundo/banner_login_cadastro.jpg');
-    background-size: cover;
-}
-
-.login .container {
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-.card {
-    width: 35%;
-    background-color: #fefaff;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    color: rgb(124, 43, 161);
-    flex-direction: column;
-    height: fit-content;
-    opacity: 93%;
-    padding: 40px 0;
-    
-}
-
-.card h2 {
-    margin: 0;
-    font-size: 30px;
-    font-family: "Gloria Hallelujah",cursive;
-}
-
-.formulario {
-    display: flex;
-    height: 90%;
-    width: 80%;
-    justify-content: space-around;
-    flex-direction: column;
-}
-
-.formulario span {
-    font-size: 25px;
-    font-weight: 800;
-    text-align: center;
-    margin-top: 10px;
-    font-family: "Gloria Hallelujah", cursive;
-}
-
-.formulario input {
-    border: none;
-    text-align: center;
-    border-radius: 10px;
-    margin: 5px;
-    padding: 15px 0;
-    background-color: #fdf2ff;
-    border: 2px solid #ffda09;
-}
-
-.formulario select {
-    border: 2px solid #ffda09;
-    background-color: white;
-    color: gray;
-    height: 36px;
-    text-align: center;
-    border-radius: 10px;
-    margin: 0;
-}
-
-.campo {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    padding: 10px 3px;
-}
-
-.botao {
-    cursor: pointer;
-    font-family: "Gloria Hallelujah", cursive;
-    border: none;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: 23px;
-    color: #fff;
-    background-color: #ffd209;
-    align-self: center;
-    padding: 23px;
-    margin-top: 20px;
-    opacity: 100%;
-}
-
-.loading-div {
-    width: 50px;
-    display: none;
-}
-
-.loading-div img {
-    height: 50px;
-    width: 50px;
-}
-
-#div_erros_login {
-    display: none }
-
-
-        .alerta_erro {
-            display: flex;
-            justify-content: flex-end;
-        }
-    
-        .card_erro {
-            display: none;
-            background-color: #fff;
-            color: black;
-            width: 230px;
-            position: fixed;
-            border-radius: 4px;
-            border: #ED145B 3px solid;
-            padding: 10px;
-            margin-right: 10%;
-        }
-    
-        .card_erro #mensagem_erro {
-            font-weight: 500;
-            font-size: 20px;     }
