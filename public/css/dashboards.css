@@ -34,3 +34,13 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+
+
+
+.tentativas{
+  width: 20px;
+}
+
+.graficoPersonagensCanvas{
+  width: 30%;
+}

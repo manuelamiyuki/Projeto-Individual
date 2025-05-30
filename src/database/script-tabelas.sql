@@ -27,6 +27,7 @@ tentativa int default 0,
 qtd_perguntas int,
 qtd_respostas_certas int,
 qtd_respostas_erradas int,
+data_quiz datetime,
 fkUsuarios int,
 foreign key (fkUsuarios) references usuarios(id)
 );

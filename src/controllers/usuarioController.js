@@ -1,4 +1,4 @@
-// transforma tudo em arq json
+
 
 var usuarioModel = require("../models/usuarioModel");
 

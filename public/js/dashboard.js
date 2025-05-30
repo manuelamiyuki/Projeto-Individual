@@ -41,7 +41,7 @@ function listar() {
                 resposta.json().then(function (resposta) {
                     obterDadosGrafico(idUsuario)
 
-                    document.getElementById("kpiPontuacao").innerText = `Pontuação: ${((15*100)/resposta[0].qtd_respostas_certas)}`;
+                    document.getElementById("kpiPontuacao").innerText = `Pontuação: ${((15 * 100) / resposta[0].qtd_respostas_certas)}`;
                     document.getElementById("kpiAcertos").innerText = `Acertos: ${resposta[0].qtd_respostas_certas}`;
                     document.getElementById("kpiErros").innerText = `Erros: ${resposta[0].qtd_respostas_erradas}`;
 
@@ -162,7 +162,7 @@ function listarPersonagensFavoaritos() {
         .then(function (resposta) {
             if (resposta.ok) {
                 resposta.json().then(function (dados) {
-                    console.log("Dados de empunhadura:", dados);
+                    console.log("Dados de personagens:", dados);
                     plotarGraficoPersonagensFavoritos(dados[0]);
                 });
             } else {
@@ -178,9 +178,9 @@ function listarPersonagensFavoaritos() {
 }
 
 function plotarGraficoPersonagensFavoritos(dados) {
-    console.log('Plotando gráfico de empunhadura com os dados:', dados);
+    console.log('Plotando gráfico de personagens com os dados:', dados);
 
-    let labels = ['Chandler','Ross','Monica','Rachel','Joey','Phoebe'];
+    let labels = ['Chandler', 'Ross', 'Monica', 'Rachel', 'Joey', 'Phoebe'];
     let valores = [dados.Chandler, dados.Ross, dados.Monica, dados.Rachel, dados.Joey, dados.Phoebe];
 
     const config = {
@@ -219,7 +219,7 @@ function plotarGraficoPersonagensFavoritos(dados) {
         }
     };
 
-  
+
     document.getElementById("graficoPersonagens").classList.remove("display-none");
     document.getElementById("graficoPersonagens").classList.add("display-block");
 
@@ -232,3 +232,78 @@ function plotarGraficoPersonagensFavoritos(dados) {
 
 
 
+
+function listarTentativaQuiz() {
+    let idUsuario = sessionStorage.ID_USUARIO;
+    fetch(`/dash/listarTentativaQuiz/${idUsuario}`)
+        .then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json().then(function (dados) {
+                    console.log("Dados de tentativas:", dados);
+
+                    document.getElementById("tentativas").innerHTML += `
+        <div id="grafico${idUsuario}">
+            <h3 class="tituloGraficos">
+                <span id="tituloAquario${idUsuario}">${dados[0].nome}</span>
+            </h3>
+            <div class="graph3">
+                <canvas id="myChartCanvasTentativa"></canvas>
+            </div>
+        </div>
+    `;
+
+                    plotarGraficoTentativaQuiz(dados, idUsuario);
+                });
+
+            } else {
+                alert("Houve um erro ao tentar puxar os dados!");
+            }
+        })
+        .catch(function (erro) {
+            console.error("#ERRO: ", erro);
+            alert("Erro ao comunicar com o servidor.");
+        });
+
+    return false;
+}
+
+
+
+function plotarGraficoTentativaQuiz(resposta, idUsuario) {
+    console.log('iniciando plotagem do gráfico...');
+
+    const labels = [];
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'Tentativas no Quiz',
+            data: [],
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+        }]
+    };
+
+    console.log('----------------------------------------------');
+    console.log('Estes dados foram recebidos pela função "obterDadosGrafico" e passados para "plotarGrafico":');
+    console.log(resposta);
+
+    labels.push(resposta[0].tentativas);
+    data.datasets[0].data.push(resposta[0].tentativas);
+
+    console.log('----------------------------------------------');
+    console.log('O gráfico será plotado com os respectivos valores:');
+    console.log('Labels:', labels);
+    console.log('Dados:', data.datasets);
+    console.log('----------------------------------------------');
+
+    const config = {
+        type: 'line',
+        data: data,
+    };
+
+    new Chart(
+        document.getElementById(`myChartCanvasTentativa`),
+        config
+    );
+}

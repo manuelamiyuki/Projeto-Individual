@@ -6,4 +6,9 @@ var dashController = require("../controllers/dashController");
 
 router.get("/listarPersonagensFavoaritos", dashController.listarPersonagensFavoaritos);
 
+
+router.get("/listarTentativaQuiz/:idUsuario", function (req, res) {
+    dashController.listarTentativaQuiz(req, res);
+});
+
 module.exports = router;

@@ -49,20 +49,54 @@
         </div>
     </header>
 
-    <h1 style="text-align: center; font-size:50px; margin: 5%;">O impacto da série!<img src="./assets/img/icone/sofa.png" width="100px"></h1> 
+    <div class="banner_curiosidades">
+        <div class="card_curiosidades">
+            <p>Antes de se ter ficado por “Friends”, a série teve outros títulos em cima da mesa como “Friends Like Us”,
+                “Six of One”,
+                “Across the Hall” e até “Insomnia Cafe”.</p>
+        </div>
+
+        <div class="card_curiosidades">
+            <p>Inicialmente Phoebe foi pensada como uma personagem mais secundária, mas no momento de desenvolvimento os
+                criadores
+                tinham uma ideia muito diferente e foi escrita originalmente como tendo o estilo ‘gótica’.</p>
+        </div>
+
+        <div class="card_curiosidades">
+            <p>O humor de Chandler é bastante peculiar e memorável mas o que muitos podem não saber é que esse é mesmo o
+                carácter de
+                Matthew Perry na personagem. Dado a perspicácia do actor para o improviso, e por os argumentistas terem
+                adorado várias
+                piadas que o actor fazia nos estúdios, foram vários os momentos introduzidos que são na verdade da
+                autoria
+                de Perry.</p>
+        </div>
+
+        <div class="card_curiosidades">
+            <p> Gunther, o empregado do Central Perk, não era para ser uma personagem com falas e
+                talvez nem com
+                nome. Só recebeu o nome em “The One Where Ross Finds Out”, antes de Rachel e Ross se beijarem. Em
+                “Friends”, ao
+                longo das 10 temporadas, todos os atores principais estiveram presentes em todos os episódios,
+                enquanto Gunther apareceu em 151!</p>
+        </div>
+
+    </div>
+
+
+    <h1 style="text-align: center; font-size:50px; margin: 5%;">O impacto da série!<img
+            src="./assets/img/icone/sofa.png" width="100px"></h1>
 
     <div class="container_select">
-
-        
 
         <div class="impacto_texto">
 
             <p>Friends promoveu a ideia de que os amigos podem ser uma segunda família, oferecendo apoio e afeto, o que
-                refletiu na mudança de valores e expectativas sociais.
+                refletiu na mudança de valores e expectativas sociais.<br><br>
                 A série contribuiu para a mudança na percepção da família tradicional, mostrando que as amizades podem
                 preencher o vazio deixado pelas famílias tradicionais.
                 Também abordou temas como casamentos, divórcios, relações amorosas e a busca por estabilidade, gerando
-                debates sobre as relações amorosas na sociedade.
+                debates sobre as relações amorosas na sociedade.<br><br>
 
                 Embora os produtores imaginaram Friends como "apenas um programa de TV",vários psicólogos pesquisaram o
                 impacto cultural da série durante o seu tempo de exibição.O penteado Aniston foi apelidado de "The
@@ -72,10 +106,6 @@
 
         </div>
 
-    </div>
-
-
-    <div class="container_select">
         <div class="temporadas">
             <h3 style="text-align: center; font-size: 30px; margin-bottom: 20px;">📺 Onde Assistir? </h3>
             <p>Atualmente, Friends está disponível em plataformas como HBO Max e Netflix, permitindo que tanto fãs
@@ -87,7 +117,10 @@
                 espectadores ao
                 redor do mundo.</p>
         </div>
+
     </div>
+
+
 
 
 
@@ -97,27 +130,27 @@
         </div>
 
         <select id="Escolha">
-                <option value="#">Insira uma temporada</option>
+            <option value="#">Insira uma temporada</option>
 
-                <option value="1">1</option>
+            <option value="1">1</option>
 
-                <option value="2">2</option>
+            <option value="2">2</option>
 
-                <option value="3">3</option>
+            <option value="3">3</option>
 
-                <option value="4">4</option>
+            <option value="4">4</option>
 
-                <option value="5">5</option>
+            <option value="5">5</option>
 
-                <option value="6">6</option>
+            <option value="6">6</option>
 
-                <option value="7">7</option>
+            <option value="7">7</option>
 
-                <option value="8">8</option>
+            <option value="8">8</option>
 
-                <option value="9">9</option>
+            <option value="9">9</option>
 
-                <option value="10">10</option>
+            <option value="10">10</option>
 
 
         </select>
@@ -128,7 +161,7 @@
         <div class="resposta_temporada">
             <div id="divTexto"></div>
         </div>
-        
+
 
     </div>
 
@@ -143,11 +176,12 @@
 
             alert("Insira uma Temporada válida!!")
 
+
             divTexto.innerHTML = ``
 
 
         } else if (selecao == '1') {
-    
+
 
             divTexto.innerHTML = `
 A primeira temporada introduz os seis personagens principais: Rachel, Monica, Phoebe, Joey, Chandler e Ross. Rachel chega no Central Perk, após deixar seu noivo Barry no altar e se mudar para o apartamento de Monica. Ross tenta constantemente dizer a Rachel que a ama, enquanto sua ex-esposa lésbica, Carol, está esperando seu bebê. Joey é apresentado como um ator lutando por seu espaço, enquanto Phoebe trabalha como massagista. Chandler termina com a namorada Janice (Maggie Wheeler), que frequentemente retorna em outros episódios. No final da temporada, Chandler acidentalmente revela que Ross ama Rachel, que percebe que ela se sente da mesma maneira. `
