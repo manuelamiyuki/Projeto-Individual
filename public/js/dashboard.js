@@ -27,6 +27,30 @@ let btnExibir = document.getElementById(`btnAquario${idUsuario}`)
 btnExibir.classList.remove("btn-white")
 btnExibir.classList.add("btn-pink")
 
+function listarIndicacoes(){
+    let idUsuario = sessionStorage.ID_USUARIO;
+
+    fetch(`/indicacao/listarIndicacoes/${idUsuario}`)
+        .then(function (resposta) {
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                resposta.json().then(function (resposta) {
+                    document.getElementById("kpiprobabilidade").innerText = `Probabilidade de indicar alguém: ${resposta[0].probabilidade}`;
+                });
+
+            } else {
+                alert("Houve um erro ao tentar puxar os dados!");
+            }
+        })
+        .catch(function (erro) {
+            console.error("#ERRO: ", erro);
+            alert("Erro ao comunicar com o servidor.");
+        });
+
+    return false;
+}
+
 
 
 function listar() {

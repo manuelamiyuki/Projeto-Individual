@@ -218,7 +218,7 @@ function avancar() {
     desmarcarRadioButtons()
 
 
-    if (numeroDaQuestaoAtual < quantidadeDeQuestoes - 1) {
+    if (numeroDaQuestaoAtual <= quantidadeDeQuestoes - 1) {
         preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual);
     } else {
         document.getElementById("btnFinalizar").disabled = false;

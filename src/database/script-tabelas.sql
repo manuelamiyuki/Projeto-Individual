@@ -32,3 +32,12 @@ fkUsuarios int,
 foreign key (fkUsuarios) references usuarios(id)
 );
 
+
+create table indicacao(
+    id int primary key auto_increment,
+    fkUsuarios int,
+    probabilidade int,
+    tempo datetime,
+    constraint chk_probabilidade check (probabilidade in(0,1,2,3,4,5,6,7,8,9,10)),
+    foreign key (fkUsuarios) references usuarios(id)
+);
