@@ -10,7 +10,7 @@
 
   <script src="./js/sessao.js"></script>
 
-  
+
 
   <link rel="stylesheet" href="./css/login-cadastro.css" />
   <link rel="icon" href="./assets/img/icone/frame.png" />
@@ -26,9 +26,10 @@
       </div>
     </div>
 
-  
+
     <div class="container">
-      <a href="index.html"><img src="./assets/img/icone/seta_esquerda.png" width="100px" style="float: left; position: absolute; top: 20px; left: 20px;"></a>
+      <a href="index.html"><img src="./assets/img/icone/seta_esquerda.png" width="100px"
+          style="float: left; position: absolute; top: 20px; left: 20px;"></a>
       <div class="card card-cadastro">
         <h2>Bem-vindo!</h2>
         <div class="formulario">
@@ -65,8 +66,10 @@
             <span>Senha:</span>
             <input id="senha_input" type="password" placeholder="******" />
           </div>
-          
-          <div class="entrar">Já tem uma conta? <a href="login.html">Entrar</a></div>
+
+          <div class="entrar">
+            <h3></h3>Já possui uma conta? <a href="login.html">Entrar</a>
+          </div>
 
           <button class="botao" onclick="cadastrar()">Cadastrar</button>
         </div>
@@ -98,7 +101,7 @@
     var personagemFavoritoVar = sel_personagem.value;
     var senhaVar = senha_input.value;
 
-  
+
 
 
     // Verificando se há algum campo em branco
@@ -107,8 +110,8 @@
       userNameVar == "" ||
       emailVar == "" ||
       personagemFavoritoVar == "#" ||
-      senhaVar == "" 
- 
+      senhaVar == ""
+
     ) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
@@ -147,7 +150,7 @@
         emailServer: emailVar,
         personagemFavoritoServer: personagemFavoritoVar,
         senhaServer: senhaVar
-        
+
       }),
     })
       .then(function (resposta) {

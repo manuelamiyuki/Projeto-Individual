@@ -164,6 +164,24 @@ function iniciarQuiz() {
 
 }
 
+function atualizarBotoes() {
+    const btnSubmeter = document.getElementById("btnSubmeterResposta");
+    const btnAvancar = document.getElementById("btnAvancarProximaQuestao");
+    const btnFinalizar = document.getElementById("btnFinalizarQuiz");
+
+    const ultimaQuestao = numeroDaQuestaoAtual === listaDeQuestoes.length - 1;
+
+    if (ultimaQuestao) {
+        btnSubmeter.style.display = "inline-block";
+        btnAvancar.style.display = "none";
+        btnFinalizar.style.display = "inline-block";
+    } else {
+        btnSubmeter.style.display = "inline-block";
+        btnAvancar.style.display = "inline-block";
+        btnFinalizar.style.display = "none";
+    }
+}
+
 function preencherHTMLcomQuestaoAtual(index) {
     habilitarAlternativas(true)
     const questaoAtual = listaDeQuestoes[index]
@@ -228,38 +246,49 @@ function avancar() {
 
 
 function checarResposta() {
-    const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual] // questão atual 
-    const respostaQuestaoAtual = questaoAtual.alternativaCorreta // qual é a resposta correta da questão atual
+    const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual]; // questão atual 
+    const respostaQuestaoAtual = questaoAtual.alternativaCorreta; // qual é a resposta correta da questão atual
 
     const options = document.getElementsByName("option"); // recupera alternativas no html
 
-    let alternativaCorreta = null // variável para armazenar a alternativa correta
+    let alternativaCorreta = null; // variável para armazenar a alternativa correta
 
+    // Descobrir qual label é a correta
     options.forEach((option) => {
         if (option.value === respostaQuestaoAtual) {
-            console.log("alternativaCorreta está no componente: " + alternativaCorreta)
-            alternativaCorreta = option.labels[0].id
+            alternativaCorreta = option.labels[0].id;
         }
-    })
+    });
 
-    // verifica se resposta assinalada é correta
     options.forEach((option) => {
-        if (option.checked === true && option.value === respostaQuestaoAtual) {
-            document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
-            pontuacaoFinal++
-            certas++
-            numeroDaQuestaoAtual++
-        } else if (option.checked && option.value !== respostaQuestaoAtual) {
-            const wrongLabelId = option.labels[0].id
+        const labelId = option.labels[0].id;
 
-            document.getElementById(wrongLabelId).classList.add("text-danger-with-bg")
-            document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
-            tentativaIncorreta++
-            erradas++
-            numeroDaQuestaoAtual++
+        // Limpa estilos anteriores
+        document.getElementById(labelId).classList.remove("text-success-with-bg", "text-danger-with-bg");
+
+        if (option.checked) {
+            if (option.value === respostaQuestaoAtual) {
+                // Correta: verde
+                document.getElementById(labelId).classList.add("text-success-with-bg");
+                pontuacaoFinal++;
+                certas++;
+            } else {
+                // Errada: vermelha a selecionada
+                document.getElementById(labelId).classList.add("text-danger-with-bg");
+                tentativaIncorreta++;
+                erradas++;
+            }
+            numeroDaQuestaoAtual++;
         }
-    })
+    });
+
+    // Independente do que foi selecionado, sempre pinta a correta de verde
+    if (alternativaCorreta) {
+        document.getElementById(alternativaCorreta).classList.add("text-success-with-bg");
+    }
+    atualizarBotoes();
 }
+
 
 function limparCoresBackgroundOpcoes() {
     const options = document.getElementsByName("option");
