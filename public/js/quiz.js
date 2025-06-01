@@ -299,6 +299,8 @@ function limparCoresBackgroundOpcoes() {
 }
 
 function entrar() {
+
+
     if (certas === 0) {
         alert("Você precisa responder ao menos uma questão.");
         return false;
