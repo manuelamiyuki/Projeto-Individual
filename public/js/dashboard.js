@@ -8,24 +8,6 @@ const erros = totalQuestoes - pontuacao;
 // Exibir KPIs
 
 
-// Mensagem personalizada
-let mensagem = "";
-if (erros > acertos) {
-    mensagem = "Mais sorte na próxima!";
-} else if (erros === acertos) {
-    mensagem = "Você está no caminho!";
-} else {
-    mensagem = "Muito bem!";
-}
-document.getElementById("mensagemFinal").innerText = mensagem;
-
-let graficoExibir = document.getElementById(`grafico${idUsuario}`)
-graficoExibir.classList.remove("display-none")
-graficoExibir.classList.add("display-block")
-
-let btnExibir = document.getElementById(`btnAquario${idUsuario}`)
-btnExibir.classList.remove("btn-white")
-btnExibir.classList.add("btn-pink")
 
 function listarIndicacoes(){
     let idUsuario = sessionStorage.ID_USUARIO;
@@ -36,8 +18,10 @@ function listarIndicacoes(){
 
             if (resposta.ok) {
                 resposta.json().then(function (resposta) {
-                    document.getElementById("kpiprobabilidade").innerText = `Probabilidade de indicar alguém: ${resposta[0].probabilidade}`;
+
+                    plotarGraficoIndicacao(resposta,idUsuario)
                 });
+
 
             } else {
                 alert("Houve um erro ao tentar puxar os dados!");
@@ -49,8 +33,66 @@ function listarIndicacoes(){
         });
 
     return false;
+
 }
 
+function plotarGraficoIndicacao(resposta,idUsuario) {
+    console.log('iniciando plotagem do gráfico...');
+    console.log('teste4',idUsuario)
+    console.log('teste5',resposta)
+
+    const labels = [];
+    const dataValues = [];
+
+    labels.push(resposta[0].nome);
+    dataValues.push(resposta[0].probabilidade); 
+
+    const dados = {
+        labels: labels,
+        datasets: [{
+            label: 'Probabilidade de Indicação',
+            data: dataValues,
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgb(255, 99, 132)',
+            borderWidth: 1
+        }]
+    };  
+
+    console.log('----------------------------------------------')
+    console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+    console.log(resposta)
+
+
+
+
+    console.log('----------------------------------------------')
+    console.log('O gráfico será plotado com os respectivos valores:')
+    console.log('Labels:')
+    console.log(labels)
+    console.log('Dados:')
+    console.log(dados.datasets)
+    console.log('----------------------------------------------')
+
+
+    const config = {
+        type: 'bar',
+        data: dados,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+                
+            }
+        },
+    };
+
+
+    new Chart(
+        document.getElementById(`graficoIndicacao`),
+        config
+    );
+}
 
 
 function listar() {
@@ -68,11 +110,14 @@ function listar() {
                     document.getElementById("kpiPontuacao").innerText = `Pontuação: ${((15 * 100) / resposta[0].qtd_respostas_certas)}`;
                     document.getElementById("kpiAcertos").innerText = `Acertos: ${resposta[0].qtd_respostas_certas}`;
                     document.getElementById("kpiErros").innerText = `Erros: ${resposta[0].qtd_respostas_erradas}`;
+                    document.getElementById("saudacoes").innerText = `Olá, ${resposta[0].nome}`;
+                    
+                   
 
                     document.getElementById("graficos").innerHTML += `
-                <div id="grafico${idUsuario}" class="display-none">
+                <div id="grafico${idUsuario}" class="display-none"> 
                     <h3 class="tituloGraficos">
-                        <span id="tituloAquario${idUsuario}">${resposta[0].nome}</span>
+                        <span id="tituloAquario${idUsuario}">Acertos X Erros</span>
                     </h3>
                     <div class="graph">
                         <canvas id="myChartCanvas${idUsuario}"></canvas>
@@ -265,18 +310,9 @@ function listarTentativaQuiz() {
                 resposta.json().then(function (dados) {
                     console.log("Dados de tentativas:", dados);
 
-                    document.getElementById("tentativas").innerHTML += `
-        <div id="grafico${idUsuario}">
-            <h3 class="tituloGraficos">
-                <span id="tituloAquario${idUsuario}">${dados[0].nome}</span>
-            </h3>
-            <div class="graph3">
-                <canvas id="myChartCanvasTentativa"></canvas>
-            </div>
-        </div>
-    `;
+                    document.getElementById("kpiTentativa").innerHTML += `${dados[0].tentativas}`;
 
-                    plotarGraficoTentativaQuiz(dados, idUsuario);
+                
                 });
 
             } else {
@@ -312,7 +348,7 @@ function plotarGraficoTentativaQuiz(resposta, idUsuario) {
     console.log('Estes dados foram recebidos pela função "obterDadosGrafico" e passados para "plotarGrafico":');
     console.log(resposta);
 
-    labels.push(resposta[0].tentativas);
+    labels.push("tentativas");
     data.datasets[0].data.push(resposta[0].tentativas);
 
     console.log('----------------------------------------------');
@@ -322,7 +358,7 @@ function plotarGraficoTentativaQuiz(resposta, idUsuario) {
     console.log('----------------------------------------------');
 
     const config = {
-        type: 'line',
+        type: 'bar',
         data: data,
     };
 

@@ -16,7 +16,7 @@ function indicar(probabilidade, idUsuario) {
 function listarIndicacoes(idUsuario){
      console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarIndicacoes():",idUsuario);
         var instrucaoSql = `
-        SELECT fkUsuarios,probabilidade as probabilidade from indicacao i inner join usuarios u on i.fkUsuarios = u.id  WHERE fkUsuarios = '${idUsuario}' order by tempo desc limit 1;
+        SELECT fkUsuarios,probabilidade as probabilidade, u.nome as nome from indicacao i inner join usuarios u on i.fkUsuarios = u.id  WHERE fkUsuarios = '${idUsuario}' order by tempo desc limit 1;
         `;
         console.log("Executando a instrução SQL: \n" + instrucaoSql);
         return database.executar(instrucaoSql);

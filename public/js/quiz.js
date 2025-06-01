@@ -165,22 +165,24 @@ function iniciarQuiz() {
 }
 
 function atualizarBotoes() {
-    const btnSubmeter = document.getElementById("btnSubmeterResposta");
-    const btnAvancar = document.getElementById("btnAvancarProximaQuestao");
-    const btnFinalizar = document.getElementById("btnFinalizarQuiz");
+    const btnSubmeter = document.getElementById("btnSubmeter");
+    const btnAvancar = document.getElementById("btnProx");
+    const btnFinalizar = document.getElementById("btnFinalizar");
 
-    const ultimaQuestao = numeroDaQuestaoAtual === listaDeQuestoes.length - 1;
+    const ultimaQuestao = numeroDaQuestaoAtual === listaDeQuestoes.length;
 
     if (ultimaQuestao) {
-        btnSubmeter.style.display = "inline-block";
+        btnSubmeter.style.display = "none";
         btnAvancar.style.display = "none";
         btnFinalizar.style.display = "inline-block";
+        btnFinalizar.disabled = false;
     } else {
         btnSubmeter.style.display = "inline-block";
         btnAvancar.style.display = "inline-block";
         btnFinalizar.style.display = "none";
     }
 }
+
 
 function preencherHTMLcomQuestaoAtual(index) {
     habilitarAlternativas(true)
@@ -228,22 +230,19 @@ function habilitarAlternativas(trueOrFalse) {
     quartaOpcao.disabled = opcaoEscolhida
 
 }
-
 function avancar() {
     btnProx.disabled = true
     btnSubmeter.disabled = false
 
     desmarcarRadioButtons()
 
-
-    if (numeroDaQuestaoAtual <= quantidadeDeQuestoes - 1) {
+    if (numeroDaQuestaoAtual < quantidadeDeQuestoes) {
         preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual);
-    } else {
-        document.getElementById("btnFinalizar").disabled = false;
     }
-    limparCoresBackgroundOpcoes()
-}
 
+    limparCoresBackgroundOpcoes()
+    atualizarBotoes();
+}
 
 function checarResposta() {
     const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual]; // questão atual 

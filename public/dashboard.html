@@ -17,7 +17,8 @@
     
     <script src="js/sessao.js"></script>
     <script src="js/dashboard.js"></script>
-   <script type="module" src="temporada.js"></script>
+        
+    <script type="module" src="js/temporada.js"></script>
 
 
     <title> CentralTalks | home</title>
@@ -56,32 +57,45 @@
 
 <body>
 
+<div class="topo">
     <h1>Resultado do Quiz</h1>
+</div>
 
+<div class="usuario" id="saudacoes">Olá, --</div>
+
+<div class="kpis">
     <div class="kpi" id="kpiPontuacao">Pontuação: --%</div>
     <div class="kpi" id="kpiAcertos">Acertos: --</div>
     <div class="kpi" id="kpiErros">Erros: --</div>
-    <div class="kpi" id="kpiprobabilidade">probabilidade: --</div>
+    <div class="kpi" id="kpiTentativa">tentativas: </div>
+</div>
 
     <div id="mensagemFinal">Carregando...</div>
 
-     <div class="dash">
+<div class="graficosCima">
+    <div class="acertosErros">
+            <div id="graficos"></div> 
+    </div>
+
+
+    <div class="indicacao">
+            <canvas id="graficoIndicacao"></canvas>
+     </div>
+</div>
+
+
+    <div class="personagensFavs">
         <div id="graficoPersonagens" class="display-none">
-            <h3 class="tituloGraficos">Jogadores Fvaoritados</h3>
+            <h3 class="tituloGraficos">Jogadores Fvaoritados</h3> 
             <div class="graph">
                 <canvas id="graficoPersonagensCanvas"></canvas>
             </div>
         </div>
-            <div id="alerta">
-            </div>
-            <div class="btns-dash" id="btnAquario">
-            </div>
-            <div id="graficos">
-            </div>
+    </div>
 
 
-            <div id="tentativas"></div>
-        </div>
+
+ 
 
 
     <div id="botoes" class="flex-colunar padding-8">
