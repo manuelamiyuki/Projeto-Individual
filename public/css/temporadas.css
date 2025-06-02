@@ -80,6 +80,10 @@ body {
     align-items: center;
     flex-direction: row;
     margin: 5%;
+    background-color: #f7eaff;
+    margin: 5%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .titulo>h1{
@@ -103,10 +107,12 @@ body {
     text-align: justify;
     /* opcional, deixa o texto alinhado */
     border-radius: 2rem;
+    border: #333 solid 2px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .card_curiosidades>p {
-    font-size: 18px;
+    font-size: 22px;
 }
 
 
@@ -180,3 +186,83 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.container_temporada{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+}
+.img_temporada img{
+    width: 600px;
+    margin-bottom: 80px;
+}
+.probInd {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5%;
+    padding: 5%;
+    flex-direction: column;
+    border-radius: 15px;
+    font-family: 'Gloria Hallelujah', cursive;
+    color: #fff;
+    background-color: #f7eaff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.probInd h1 {
+    font-size: 35px;
+    margin-bottom: 20px;
+    color: #292103;
+}
+
+.opc_prob {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.opc_prob label {
+    font-size: 20px;
+    padding: 10px 18px;
+    background-color: #e98b2e;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
+    color: white;
+    display: inline-block;
+    text-align: center;
+}
+
+.opc_prob input[type="radio"] {
+    display: none;
+}
+
+.opc_prob input[type="radio"]:checked+label {
+    background-color: #6a5acd;
+    transform: scale(1.1);
+}
+
+.btn_probInd button {
+    font-family: 'Gloria Hallelujah', cursive;
+    background-color: #f26b38;
+    color: white;
+    padding: 10px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.2s;
+    display: flex;
+    margin-left: 40px;
+}
+
+.btn_probInd button:hover {
+    background-color: #ffa0ff;
+    transform: scale(1.05); }   
+
+    

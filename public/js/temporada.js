@@ -1,4 +1,44 @@
 
+function indicacao() {
+        const radios = document.querySelectorAll('input[name="opcao"]');
+        let probabilidade = null;
+
+        for (let i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                probabilidade = radios[i].value;
+                break;
+            }
+        }
+
+        if (!probabilidade) {
+            alert("Por favor, selecione uma opção!");
+            return;
+        }
+
+        fetch("/indicacao/indicar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                probabilidadeServer: probabilidade,
+                idUsuario: sessionStorage.ID_USUARIO,
+            }),
+        })
+            .then(resposta => {
+                if (resposta.ok) {
+                    setTimeout(() => {
+                        window.location = "dashboard.html";
+                    }, 2000);
+                } else {
+                    alert("Erro ao enviar os dados.");
+                }
+            })
+            .catch(erro => {
+                console.error("#ERRO:", erro);
+                alert("Erro ao comunicar com o servidor.");
+            });
+    }
 
     divTexto.style.display = 'none';
 

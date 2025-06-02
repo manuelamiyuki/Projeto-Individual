@@ -6,6 +6,19 @@
     box-sizing: border-box;
 }
 
+ul{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+ul>li:hover{
+
+    transform: translateY(-5px);  
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+h1{
+    font-family: "Gloria Hallelujah", cursive;
+}
 /* barra de navegação*/
 
 .header {

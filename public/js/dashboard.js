@@ -21,8 +21,6 @@ function listarIndicacoes(){
 
                     plotarGraficoIndicacao(resposta,idUsuario)
                 });
-
-
             } else {
                 alert("Houve um erro ao tentar puxar os dados!");
             }
@@ -44,7 +42,7 @@ function plotarGraficoIndicacao(resposta,idUsuario) {
     const labels = [];
     const dataValues = [];
 
-    labels.push(resposta[0].nome);
+    labels.push(resposta[0].user);
     dataValues.push(resposta[0].probabilidade); 
 
     const dados = {
@@ -107,10 +105,10 @@ function listar() {
                 resposta.json().then(function (resposta) {
                     obterDadosGrafico(idUsuario)
 
-                    document.getElementById("kpiPontuacao").innerText = `Pontuação: ${((15 * 100) / resposta[0].qtd_respostas_certas)}`;
+                    document.getElementById("kpiPontuacao").innerText = `Pontuação: ${((resposta[0].qtd_respostas_certas / 15) * 100).toFixed(2)}%`;    
                     document.getElementById("kpiAcertos").innerText = `Acertos: ${resposta[0].qtd_respostas_certas}`;
                     document.getElementById("kpiErros").innerText = `Erros: ${resposta[0].qtd_respostas_erradas}`;
-                    document.getElementById("saudacoes").innerText = `Olá, ${resposta[0].nome}`;
+                    document.getElementById("saudacoes").innerText = `Olá, ${resposta[0].user}`;
                     
                    
 
@@ -178,8 +176,8 @@ function plotarGrafico(resposta, idUsuario) {
             label: 'Quantidade:',
             data: [resposta[0].qtd_respostas_erradas,],
             backgroundColor: [
-                'rgb(255, 99, 99)',
-                'rgb(102, 235, 54)',
+                'rgb(253, 27, 178)',
+                'rgb(141, 207, 117)',
             ],
             hoverOffset: 4
         }]
@@ -260,22 +258,22 @@ function plotarGraficoPersonagensFavoritos(dados) {
                 label: 'Personagens Favoritados',
                 data: valores,
                 backgroundColor: [
-                    'rgb(255, 159, 64)',
-                    'rgb(54, 162, 235)',
-                    'rgb(153, 102, 255)',
-                    'rgb(102, 255, 148)',
-                    'rgb(255, 102, 222)',
-                    'rgb(245, 255, 102)',
+                    'rgb(248, 187, 126)',
+                    'rgb(138, 203, 247)',
+                    'rgb(119, 97, 165)',
+                    'rgb(179, 255, 202)',
+                    'rgb(253, 169, 235)',
+                    'rgb(250, 255, 183)',
                 ],
                 borderColor: [
                     'rgb(255, 159, 64)',
                     'rgb(54, 162, 235)',
-                    'rgb(153, 102, 255)',
+                    'rgb(89, 68, 136)',
                     'rgb(102, 255, 148)',
                     'rgb(255, 102, 222)',
                     'rgb(245, 255, 102)',
                 ],
-                borderWidth: 1
+                borderWidth: 3
             }]
         },
         options: {
@@ -366,4 +364,8 @@ function plotarGraficoTentativaQuiz(resposta, idUsuario) {
         document.getElementById(`myChartCanvasTentativa`),
         config
     );
+}
+
+function tentarNovamente(){
+    window.location = "../quiz.html"
 }
