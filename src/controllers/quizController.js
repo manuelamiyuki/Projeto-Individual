@@ -25,7 +25,7 @@ function enviarQuiz(req,res) {
 
 
 
-    
+    // select do grafico do quiz (traz os dados e no dashboard plota)
 function listarQuiz(req, res) {
     var idUsuario = req.params.idUsuario;
 

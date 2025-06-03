@@ -7,8 +7,6 @@ const erros = totalQuestoes - pontuacao;
 
 // Exibir KPIs
 
-
-
 function listarIndicacoes(){
     let idUsuario = sessionStorage.ID_USUARIO;
 
@@ -95,14 +93,15 @@ function plotarGraficoIndicacao(resposta,idUsuario) {
 
 function listarQuiz() {
     console.log(sessionStorage.ID_USUARIO);
-    let idUsuario = sessionStorage.ID_USUARIO;
+    let idUsuario = sessionStorage.ID_USUARIO; 
 
     fetch(`/quiz/listarQuiz/${idUsuario}`)
         .then(function (resposta) {
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                resposta.json().then(function (resposta) {
+                resposta.json()
+                .then(function (resposta) {
                     obterDadosGrafico(idUsuario)
 
                     document.getElementById("kpiPontuacao").innerText = `Pontuação: ${((resposta[0].qtd_respostas_certas / 15) * 100).toFixed(2)}%`;    
@@ -115,7 +114,7 @@ function listarQuiz() {
                     document.getElementById("graficos").innerHTML += `
                 <div id="grafico${idUsuario}" class="display-none"> 
                     <h3 class="tituloGraficos">
-                        <span id="tituloAquario${idUsuario}">Acertos X Erros</span>
+                        <span id="tituloQuiz${idUsuario}">Acertos X Erros</span>
                     </h3>
                     <div class="graph">
                         <canvas id="myChartCanvas${idUsuario}"></canvas>
@@ -143,11 +142,12 @@ function listarQuiz() {
 
 function obterDadosGrafico(idUsuario) {
 
-    fetch(`/quiz/listarQuiz/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+    fetch(`/quiz/listarQuiz/${idUsuario}`, { cache: 'no-store' }) // instrui o navegador a não usar o cache, pegar a versão mais recente!!!!
+    .then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                resposta.reverse();
+                resposta.reverse(); // inverte a ordem dos elementos no array pra pegar o mais recente
 
                 plotarGrafico(resposta, idUsuario);
 
@@ -174,7 +174,7 @@ function plotarGrafico(resposta, idUsuario) {
         ],
         datasets: [{
             label: 'Quantidade:',
-            data: [resposta[0].qtd_respostas_erradas,],
+            data: [],
             backgroundColor: [
                 'rgb(253, 27, 178)',
                 'rgb(141, 207, 117)',
@@ -189,6 +189,8 @@ function plotarGrafico(resposta, idUsuario) {
     console.log(resposta)
 
     labels.push(resposta[0].qtd_respostas_certas);
+    
+    dados.datasets[0].data.push(resposta[0].qtd_respostas_erradas);
     dados.datasets[0].data.push(resposta[0].qtd_respostas_certas);
 
 
@@ -203,7 +205,7 @@ function plotarGrafico(resposta, idUsuario) {
 
     const config = {
         type: 'pie',
-        data: dados,
+        data: dados,    
     };
 
 
@@ -224,8 +226,8 @@ function tentarNovamente() {
 
 
 
-function listarPersonagensFavoaritos() {
-    fetch(`/dash/listarPersonagensFavoaritos`)
+function listarPersonagensFavoritos() {
+    fetch(`/dash/listarPersonagensFavoritos`)
         .then(function (resposta) {
             if (resposta.ok) {
                 resposta.json().then(function (dados) {
@@ -248,7 +250,7 @@ function plotarGraficoPersonagensFavoritos(dados) {
     console.log('Plotando gráfico de personagens com os dados:', dados);
 
     let labels = ['Chandler', 'Ross', 'Monica', 'Rachel', 'Joey', 'Phoebe'];
-    let valores = [dados.Chandler, dados.Ross, dados.Monica, dados.Rachel, dados.Joey, dados.Phoebe];
+    let valores = [dados.Chandler, dados.Ross, dados.Monica, dados.Rachel, dados.Joey, dados.Phoebe]; // chamando o apelido que eu dei no select (na subquery)
 
     const config = {
         type: 'bar',
@@ -331,45 +333,6 @@ function listarTentativaQuiz() {
 }
 
 
-
-function plotarGraficoTentativaQuiz(resposta, idUsuario) {
-    console.log('iniciando plotagem do gráfico...');
-
-    const labels = [];
-    const data = {
-        labels: labels,
-        datasets: [{
-            label: 'Tentativas no Quiz',
-            data: [],
-            fill: false,
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1
-        }]
-    };
-
-    console.log('----------------------------------------------');
-    console.log('Estes dados foram recebidos pela função "obterDadosGrafico" e passados para "plotarGrafico":');
-    console.log(resposta);
-
-    labels.push("tentativas");
-    data.datasets[0].data.push(resposta[0].tentativas);
-
-    console.log('----------------------------------------------');
-    console.log('O gráfico será plotado com os respectivos valores:');
-    console.log('Labels:', labels);
-    console.log('Dados:', data.datasets);
-    console.log('----------------------------------------------');
-
-    const config = {
-        type: 'bar',
-        data: data,
-    };
-
-    new Chart(
-        document.getElementById(`myChartCanvasTentativa`),
-        config
-    );
-}
 
 function tentarNovamente(){
     window.location = "../quiz.html"

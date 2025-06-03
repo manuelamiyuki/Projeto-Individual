@@ -1,8 +1,8 @@
 
 var dashModel = require("../models/dashModel");
 
-function listarPersonagensFavoaritos(req, res) {
-    dashModel.listarPersonagensFavoaritos()
+function listarPersonagensFavoritos(req, res) {
+    dashModel.listarPersonagensFavoritos()
         .then(function (resultado) {
             if (resultado.length > 0) {
                 res.status(200).json(resultado);
@@ -36,6 +36,6 @@ function listarTentativaQuiz(req, res) {
         });
 }
 module.exports = {
-    listarPersonagensFavoaritos,
+    listarPersonagensFavoritos,
     listarTentativaQuiz,
 };

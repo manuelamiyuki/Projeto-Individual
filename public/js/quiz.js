@@ -144,7 +144,7 @@ let tentativaIncorreta = 0
 let certas = 0
 let erradas = 0
 let quantidadeDeQuestoes = listaDeQuestoes.length
-// let isUltima = numeroDaQuestaoAtual == quantidadeDeQuestoes-1 ? true : false
+
 
 function onloadEsconder() {
     document.getElementById('jogo').style.display = "none"
@@ -160,7 +160,6 @@ function iniciarQuiz() {
 
     btnSubmeter.disabled = false
     btnProx.disabled = true
-    // btnConcluir.disabled = true
 
 }
 
@@ -253,7 +252,7 @@ function checarResposta() {
     let alternativaCorreta = null; // variável para armazenar a alternativa correta
 
     // Descobrir qual label é a correta
-    options.forEach((option) => {
+    options.forEach((option) => { //é um for para cada opção (que eu passei no parâmetro)
         if (option.value === respostaQuestaoAtual) {
             alternativaCorreta = option.labels[0].id;
         }
@@ -307,7 +306,7 @@ function finalizarQuiz() {
         body: JSON.stringify({
             perguntasErradasServer: erradas,
             perguntasCertasServer: certas,
-            idUsuario: sessionStorage.ID_USUARIO,
+            idUsuario: sessionStorage.ID_USUARIO, // vem do usuário controller
         }),
     })
         .then(function (resposta) { // so executa qnd recebe resposta do controllers (depois de validar no models)
