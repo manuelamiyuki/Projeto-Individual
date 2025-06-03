@@ -93,11 +93,11 @@ function plotarGraficoIndicacao(resposta,idUsuario) {
 }
 
 
-function listar() {
+function listarQuiz() {
     console.log(sessionStorage.ID_USUARIO);
     let idUsuario = sessionStorage.ID_USUARIO;
 
-    fetch(`/quiz/listar/${idUsuario}`)
+    fetch(`/quiz/listarQuiz/${idUsuario}`)
         .then(function (resposta) {
             console.log("resposta: ", resposta);
 
@@ -143,7 +143,7 @@ function listar() {
 
 function obterDadosGrafico(idUsuario) {
 
-    fetch(`/quiz/listar/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+    fetch(`/quiz/listarQuiz/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);

@@ -26,10 +26,10 @@ function enviarQuiz(req,res) {
 
 
     
-function listar(req, res) {
+function listarQuiz(req, res) {
     var idUsuario = req.params.idUsuario;
 
-    quizModel.listar(idUsuario)
+    quizModel.listarQuiz(idUsuario)
         .then(
             function (resultado) {
                 if (resultado.length > 0) {
@@ -54,5 +54,5 @@ function listar(req, res) {
 
 module.exports = {
     enviarQuiz,
-    listar,
+    listarQuiz,
 }

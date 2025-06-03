@@ -297,7 +297,7 @@ function limparCoresBackgroundOpcoes() {
     })
 }
 
-function entrar() {
+function finalizarQuiz() {
 
     fetch("/quiz/enviarQuiz", {
         method: "POST",
