@@ -299,13 +299,7 @@ function limparCoresBackgroundOpcoes() {
 
 function entrar() {
 
-
-    if (certas === 0) {
-        alert("Você precisa responder ao menos uma questão.");
-        return false;
-    }
-
-    fetch("/quiz/enviar", {
+    fetch("/quiz/enviarQuiz", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -316,7 +310,7 @@ function entrar() {
             idUsuario: sessionStorage.ID_USUARIO,
         }),
     })
-        .then(function (resposta) {
+        .then(function (resposta) { // so executa qnd recebe resposta do controllers (depois de validar no models)
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {

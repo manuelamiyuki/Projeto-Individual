@@ -1,17 +1,17 @@
 var quizModel = require("../models/quizModel");
 
 
-function enviar(req,res) {
+function enviarQuiz(req,res) {
     var qtd_respostas_erradas = req.body.perguntasErradasServer;
     var qtd_respostas_certas = req.body.perguntasCertasServer;
     var idUsuario = req.body.idUsuario;
 
-        quizModel.enviar(qtd_respostas_erradas,qtd_respostas_certas,idUsuario)
-            .then(
-                function (resultado) {
-                    res.json(resultado);
+    quizModel.enviarQuiz(qtd_respostas_erradas, qtd_respostas_certas, idUsuario) //manda pro quiz models (pra botar no banco e voltar)
+            .then( 
+                function (resultado) { 
+                    res.json(resultado); // aqui valida se ta certo o que veio do models (informação do model)
                 }
-            ).catch(
+            ).catch( // aqui é quando nao ta ok
                 function (erro) {
                     console.log(erro);
                     console.log(
@@ -53,6 +53,6 @@ function listar(req, res) {
 
 
 module.exports = {
-    enviar,
+    enviarQuiz,
     listar,
 }

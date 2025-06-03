@@ -217,7 +217,7 @@ body {
     color: #292103;
 }
 
-.opc_prob {
+#opc_prob {
     display: flex;
     gap: 12px;
     justify-content: center;
@@ -225,7 +225,7 @@ body {
     margin-bottom: 25px;
 }
 
-.opc_prob label {
+#opc_prob label {
     font-size: 20px;
     padding: 10px 18px;
     background-color: #e98b2e;
@@ -237,11 +237,11 @@ body {
     text-align: center;
 }
 
-.opc_prob input[type="radio"] {
+#opc_prob input[type="radio"] {
     display: none;
 }
 
-.opc_prob input[type="radio"]:checked+label {
+#opc_prob input[type="radio"]:checked+label {
     background-color: #6a5acd;
     transform: scale(1.1);
 }

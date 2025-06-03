@@ -12,7 +12,7 @@ function listarPersonagensFavoaritos(req, res) {
         })
         .catch(function (erro) {
             console.log(erro);
-            console.log("Houve um erro ao buscar as empunhaduras: ", erro.sqlMessage);
+            console.log("Houve um erro ao buscar os personagens favoritos: ", erro.sqlMessage);
             res.status(500).json(erro.sqlMessage);
         });
 }

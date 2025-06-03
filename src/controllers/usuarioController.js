@@ -4,7 +4,7 @@ var usuarioModel = require("../models/usuarioModel");
 
 
 function autenticar(req, res) {
-    var email = req.body.emailServer;
+    var email = req.body.emailServer; 
     var senha = req.body.senhaServer;
 
     if (email == undefined) {
@@ -19,7 +19,7 @@ function autenticar(req, res) {
                     console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
                     console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
 
-                    if (resultadoAutenticar.length == 1) {
+                    if (resultadoAutenticar.length == 1) { //se for 1 é true (ta ok, pode mandar pra funçaõ principal no js)
                         console.log(resultadoAutenticar);
 
                                     res.json({
@@ -88,6 +88,7 @@ function cadastrar(req, res) {
     }
 }
 
+// nomea as funções (da onde ta vindo e oq ta exigindo)
 module.exports = {
     autenticar,
     cadastrar

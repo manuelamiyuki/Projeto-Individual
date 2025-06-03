@@ -1,4 +1,4 @@
-function entrar() {
+function entrar() { //serve p unir 
     aguardar();
 
     var emailVar = email_input.value;
@@ -17,12 +17,12 @@ function entrar() {
     console.log("FORM LOGIN: ", emailVar);
     console.log("FORM SENHA: ", senhaVar);
 
-    fetch("/usuarios/autenticar", {
+    fetch("/usuarios/autenticar", { // rota de usuarios na função autenticar
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({
+        body: JSON.stringify({ // converte em arquivo json de string
             emailServer: emailVar,
             senhaServer: senhaVar
         })
@@ -35,7 +35,7 @@ function entrar() {
             resposta.json().then(json => {
                 console.log(json);
                 console.log(JSON.stringify(json));
-                sessionStorage.EMAIL_USUARIO = json.email;
+                sessionStorage.EMAIL_USUARIO = json.email; // se a resposta for ok, armazena e vai pro quiz
                 sessionStorage.NOME_USUARIO = json.nome;
                 sessionStorage.ID_USUARIO = json.id;
 
@@ -45,7 +45,7 @@ function entrar() {
 
             });
 
-        } else {
+        } else { // resposta nao ok
 
             console.log("Houve um erro ao tentar realizar o login!");
 

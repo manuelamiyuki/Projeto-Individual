@@ -1,8 +1,8 @@
 var database = require("../database/config");
 
 
-function enviar(qtd_respostas_erradas,qtd_respostas_certas, idUsuario) {
-    console.log("ACESSEI O quiz MODEL - função enviar():", qtd_respostas_erradas,qtd_respostas_certas, idUsuario);
+function enviarQuiz(qtd_respostas_erradas,qtd_respostas_certas, idUsuario) {
+    console.log("ACESSEI O quiz MODEL - função enviarQuiz():", qtd_respostas_erradas,qtd_respostas_certas, idUsuario);
     
     var instrucaoSql = `
         INSERT INTO quiz (qtd_respostas_erradas,qtd_respostas_certas,qtd_perguntas,data_quiz,fkUsuarios) VALUES ('${qtd_respostas_erradas}','${qtd_respostas_certas}','15',current_timestamp(),'${idUsuario}');
@@ -22,6 +22,6 @@ function listar(idUsuario) {
 }
 
 module.exports = {
-    enviar,
+    enviarQuiz,
     listar,
 };
