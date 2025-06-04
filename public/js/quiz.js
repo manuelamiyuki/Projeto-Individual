@@ -158,7 +158,7 @@ function iniciarQuiz() {
 
     preencherHTMLcomQuestaoAtual(0)
 
-    btnSubmeter.disabled = false
+    btnSubmeter.disabled = false //não posso avançar antes de submeter
     btnProx.disabled = true
 
 }
@@ -168,7 +168,7 @@ function atualizarBotoes() {
     const btnAvancar = document.getElementById("btnProx");
     const btnFinalizar = document.getElementById("btnFinalizar");
 
-    const ultimaQuestao = numeroDaQuestaoAtual === listaDeQuestoes.length;
+    const ultimaQuestao = numeroDaQuestaoAtual === listaDeQuestoes.length; // verifica se é a ultima questão
 
     if (ultimaQuestao) {
         btnSubmeter.style.display = "none";
@@ -183,10 +183,10 @@ function atualizarBotoes() {
 }
 
 
-function preencherHTMLcomQuestaoAtual(index) {
-    habilitarAlternativas(true)
-    const questaoAtual = listaDeQuestoes[index]
-    numeroDaQuestaoAtual = index
+function preencherHTMLcomQuestaoAtual(index) { //quero receber o parametro index que me diz qual questão do quiz ta exibindo
+    habilitarAlternativas(true) 
+    const questaoAtual = listaDeQuestoes[index] // recebe como valor o item que tá dentro da lista de questões -- pega a pergunta correta q tem q ser exibida       
+    numeroDaQuestaoAtual = index // sabe qual questão está sendo exibida no momento
     console.log("questaoAtual")
     console.log(questaoAtual)
     document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1 // ajustando porque o index começa em 0
@@ -220,10 +220,10 @@ function submeter() {
     }
 }
 
-function habilitarAlternativas(trueOrFalse) {
-    let opcaoEscolhida = trueOrFalse ? false : true
+function habilitarAlternativas(trueOrFalse) { // na hora que ta checando, não da pra clicar na alternativa
+    let opcaoEscolhida = trueOrFalse ? false : true //true: habilita, false: desabilita 
 
-    primeiraOpcao.disabled = opcaoEscolhida
+    primeiraOpcao.disabled = opcaoEscolhida // se true, o disabled faz não funcionar
     segundaOpcao.disabled = opcaoEscolhida
     terceiraOpcao.disabled = opcaoEscolhida
     quartaOpcao.disabled = opcaoEscolhida
@@ -247,40 +247,40 @@ function checarResposta() {
     const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual]; // questão atual 
     const respostaQuestaoAtual = questaoAtual.alternativaCorreta; // qual é a resposta correta da questão atual
 
-    const options = document.getElementsByName("option"); // recupera alternativas no html
+    const options = document.getElementsByName("option");        //esse parametro (option) faz com que minha label no css seja estilizada apenas quando passar na validação
 
     let alternativaCorreta = null; // variável para armazenar a alternativa correta
 
-    // Descobrir qual label é a correta
-    options.forEach((option) => { //é um for para cada opção (que eu passei no parâmetro)
+    // Compara option.value com respostaQuestaoAtual.
+    options.forEach((option) => { 
         if (option.value === respostaQuestaoAtual) {
-            alternativaCorreta = option.labels[0].id;
+            alternativaCorreta = option.labels[0].id; //pega o id da label que eu quero e estiliza no css
         }
-    });
+    }); 
 
-    options.forEach((option) => {
-        const labelId = option.labels[0].id;
+    options.forEach((option) => { // percorre cada opção p ver qual foi selecionada e aplica os estilos
+        const labelId = option.labels[0].id; //para saber qual label pintar 
 
-        // Limpa estilos anteriores
+        // limpa estilos anteriores quando vai pra prox p n ficar duas cores
         document.getElementById(labelId).classList.remove("text-success-with-bg", "text-danger-with-bg");
 
-        if (option.checked) {
+        if (option.checked) { // qnd for marcado 
             if (option.value === respostaQuestaoAtual) {
-                // Correta: verde
+                // correta: adiciona a classe verde no css e tambem no fake (é oq tem em volta)
                 document.getElementById(labelId).classList.add("text-success-with-bg");
                 pontuacaoFinal++;
                 certas++;
             } else {
-                // Errada: vermelha a selecionada
+                // errada: classe vermelha 
                 document.getElementById(labelId).classList.add("text-danger-with-bg");
                 tentativaIncorreta++;
                 erradas++;
             }
-            numeroDaQuestaoAtual++;
+            numeroDaQuestaoAtual++; 
         }
     });
 
-    // Independente do que foi selecionado, sempre pinta a correta de verde
+    // independente do que foi selecionado, sempre pinta a correta de verde
     if (alternativaCorreta) {
         document.getElementById(alternativaCorreta).classList.add("text-success-with-bg");
     }
@@ -288,9 +288,9 @@ function checarResposta() {
 }
 
 
-function limparCoresBackgroundOpcoes() {
+function limparCoresBackgroundOpcoes() { // serve p que a questão não fique marcada com as cores da anterior
     const options = document.getElementsByName("option");
-    options.forEach((option) => {
+    options.forEach((option) => { 
         document.getElementById(option.labels[0].id).classList.remove("text-danger-with-bg")
         document.getElementById(option.labels[0].id).classList.remove("text-success-with-bg")
     })

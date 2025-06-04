@@ -296,6 +296,7 @@ function plotarGraficoPersonagensFavoritos(dados) {
 
     document.getElementById("graficoPersonagens").classList.remove("display-none");
     document.getElementById("graficoPersonagens").classList.add("display-block");
+    
 
     // Criar o gráfico
     new Chart(

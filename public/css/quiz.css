@@ -201,7 +201,7 @@ body {
 
 
 
-/* Mantém oculto o input original */
+/* estiliza qunado passar no if da linha do foreach, por enquanto ta oculto*/
 #jogo input[type="radio"] {
     display: none;
 }

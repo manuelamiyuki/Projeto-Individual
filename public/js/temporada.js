@@ -1,16 +1,16 @@
 
 function indicacao() {
-        const radios = document.querySelectorAll('input[name="opcao"]');
+        const radios = document.querySelectorAll('input[name="opcao"]'); // seleciona todos os selects que tiverem com input com o nome opção
         let probabilidade = null;
 
-        for (let i = 0; i < radios.length; i++) {
+        for (let i = 0; i < radios.length; i++) { // for para verificar se a opção do select ta marcada e a q tiver atribui o valor
             if (radios[i].checked) {
                 probabilidade = radios[i].value;
                 break;
             }
         }
 
-        if (!probabilidade) {
+        if (!probabilidade) { // 
             alert("Por favor, selecione uma opção!");
             return;
         }

@@ -4,7 +4,7 @@ var usuarioModel = require("../models/usuarioModel");
 
 
 function autenticar(req, res) {
-    var email = req.body.emailServer; 
+    var email = req.body.emailServer; //traz o valor que foi passado no login no .json
     var senha = req.body.senhaServer;
 
     if (email == undefined) {
@@ -47,7 +47,7 @@ function autenticar(req, res) {
 }
 
 function cadastrar(req, res) {
-    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro
     var nome = req.body.nomeServer;
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
@@ -73,7 +73,7 @@ function cadastrar(req, res) {
         usuarioModel.cadastrar(nome, userName, email, personagemFavorito, senha)
             .then(
                 function (resultado) {
-                    res.json(resultado);
+                    res.json(resultado); // armazena em um arq json o paramtro da função q veio do banco (models) - insert do banco
                 }
             ).catch(
                 function (erro) {

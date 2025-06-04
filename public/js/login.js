@@ -31,21 +31,21 @@ function entrar() { //serve p unir
 
         if (resposta.ok) {
             console.log(resposta);
-
+                                            //se for ok, vai salvar em um arq json
             resposta.json().then(json => {
                 console.log(json);
                 console.log(JSON.stringify(json));
-                sessionStorage.EMAIL_USUARIO = json.email; // se a resposta for ok, armazena e vai pro quiz
+                sessionStorage.EMAIL_USUARIO = json.email; // armazena o sessionStorage q veio do controller
                 sessionStorage.NOME_USUARIO = json.nome;
                 sessionStorage.ID_USUARIO = json.id;
 
                 setTimeout(function () {
                     window.location = "quiz.html";
-                }, 1000); // apenas para exibir o loading
+                }, 1000);
 
             });
 
-        } else { // resposta nao ok
+        } else {
 
             console.log("Houve um erro ao tentar realizar o login!");
 
